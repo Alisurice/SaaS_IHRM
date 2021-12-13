@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//解决跨域问题
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/company")
 public class CompanyController {
@@ -51,7 +53,6 @@ public class CompanyController {
     //查询全部企业列表
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Result findAll(){
-        int i = 1/0;
         List<Company> list = companyService.findAll();
         Result result = new Result(ResultCode.SUCCESS);
         result.setData(list);
