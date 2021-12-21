@@ -17,3 +17,8 @@ spring:
     database: MySQL
     show-sql: true
     open-in-view: true
+  devtools:
+    restart:
+      enabled: true
+# 当前企业
+company-id: 1
