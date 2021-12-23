@@ -37,7 +37,7 @@ public class Permission implements Serializable {
     private Integer type;
 
 
-    //权限编码
+    //权限编码。如果用户拥有该编码，则代表具有该权限。
     private String code;
 
     /**

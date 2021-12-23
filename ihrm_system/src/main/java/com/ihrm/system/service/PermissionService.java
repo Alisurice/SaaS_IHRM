@@ -86,7 +86,6 @@ public class PermissionService {
      * 更新
      */
     public void update(Map<String,Object> map) throws Exception {
-
         Permission perm = BeanMapUtils.mapToBean(map , Permission.class);
         //通过传递的权限id查询权限
         Permission permission = permissionDao.findById(perm.getId()).get();
@@ -154,10 +153,11 @@ public class PermissionService {
 
     /**
      * 查询全部用户列表
-     * type     :   查询全部权限列表
-     *          0 : 菜单 + 按钮(权限点)    1 ： 菜单  2 : 按钮(权限点) 3 ： API接口
-     * enVisible :
-     *          0 ： 查询SaaS平台的最高权限   1 ： 查询企业的权限
+     *type     :   查询全部权限列表
+     * 0 : 菜单 + 按钮(权限点)    1 ： 菜单  2 : 按钮(权限点) 3 ： API接口
+     *enVisible :
+     * 0 ： 查询SaaS平台的最高权限   1 ： 查询企业的权限
+     *pid: 父id
      */
     public List<Permission> findAll(Map<String,Object> map){
 
@@ -188,8 +188,8 @@ public class PermissionService {
                 //根据类型type进行查询
                 if (!StringUtils.isEmpty(map.get("type"))){
                     String type = (String) map.get("type");
+                    //对应 where type in (...)
                     CriteriaBuilder.In<Object> in = cb.in(root.get("type"));
-
                     if ("0".equals(type)){
                         in.value(1).value(2);
                     }else {

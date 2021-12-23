@@ -32,6 +32,7 @@ public class PermissionController {
         permissionService.save(map);
         return new Result(ResultCode.SUCCESS);
     }
+
     
     /**
      * 修改
@@ -45,8 +46,12 @@ public class PermissionController {
     }
 
     /**
-     * 查询列表
-     * @return
+     * 查询全部用户列表
+     *type     :   查询全部权限列表
+     * 0 : 菜单 + 按钮(权限点)    1 ： 菜单  2 : 按钮(权限点) 3 ： API接口
+     *enVisible :
+     * 0 ： 查询SaaS平台的最高权限   1 ： 查询企业的权限
+     *pid: 父id
      */
     @RequestMapping(value = "/permission" , method = RequestMethod.GET)
     public Result findAll(@RequestParam() Map map){
