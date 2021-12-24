@@ -91,7 +91,7 @@ public class PermissionService {
         Permission permission = permissionDao.findById(perm.getId()).get();
         permission.setName(perm.getName());
         permission.setDescription(perm.getDescription());
-        perm.setEnVisible(perm.getEnVisible());
+        permission.setEnVisible(perm.getEnVisible());
         //根据类型构造不同的资源
         int type = perm.getType();
         switch (type){
