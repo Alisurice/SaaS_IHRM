@@ -24,7 +24,6 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
-
     /**
      * 分配角色
      */
@@ -37,7 +36,6 @@ public class UserController extends BaseController {
         List<String> roleIds = (List<String>) map.get("roleIds");
         //调用service完成角色分配
         userService.assignRoles(userId , roleIds);
-
         return new Result(ResultCode.SUCCESS);
     }
 
@@ -74,7 +72,6 @@ public class UserController extends BaseController {
         return new Result(ResultCode.SUCCESS , pageResult);
     }
 
-
     /**
      * 根据Id查询
      */
@@ -106,5 +103,7 @@ public class UserController extends BaseController {
         userService.deleteById(id);
         return new Result(ResultCode.SUCCESS);
     }
+
+
 
 }
