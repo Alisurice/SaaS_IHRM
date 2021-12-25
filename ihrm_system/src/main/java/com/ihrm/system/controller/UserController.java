@@ -163,16 +163,19 @@ public class UserController extends BaseController {
         User user = userService.findById(userId);
         //根据不同的用户级别获取用户权限
         ProfileResult result = null;
-
-        if ("user".equals(user.getLevel())){
+        Map map = new HashMap();
+        if ("user".equals(user.getLevel()) || StringUtils.isEmpty(user.getLevel())){
             result = new ProfileResult(user);
-        }else {
-            Map map = new HashMap();
-            if ("coAdmin".equals(user.getLevel())){
-                map.put("enVisible" , "1");
-            }
+            return new Result(ResultCode.SUCCESS, result);
+        }else if ("coAdmin".equals(user.getLevel())){
+            map.put("enVisible" , "1");
             List<Permission> list = permissionService.findAll(map);
             result = new ProfileResult(user , list);
+            return new Result(ResultCode.SUCCESS, result);
+        }else if ("saasAdmin".equals(user.getLevel())){
+            List<Permission> list = permissionService.findAll(map);
+            result = new ProfileResult(user , list);
+            return new Result(ResultCode.SUCCESS, result);
         }
         return new Result(ResultCode.SUCCESS, result);
     }

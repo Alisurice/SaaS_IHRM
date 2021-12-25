@@ -55,6 +55,13 @@ public class PermissionService {
         String id = idWorker.nextId() + "";
         //通过map构造权限对象
         Permission perm = BeanMapUtils.mapToBean(map , Permission.class);
+
+        //必须有权限编码，不然前端显示会出现异常
+        if(perm.getCode() == null || perm.getName() == null){
+            //perm.setCode("");
+            throw new CommonException(ResultCode.PERMISSIONERROR);
+        }
+
         perm.setId(id);
         //根据类型构造不同的资源对象(菜单,按钮,api)
         int type = perm.getType();

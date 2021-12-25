@@ -19,7 +19,10 @@ public enum ResultCode {
     SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！"),
 
     //---用户操作返回码  2xxxx----
-    MOBILEORPASSWORDERROR(false,20001,"用户名或密码错误");
+    MOBILEORPASSWORDERROR(false,20001,"用户名或密码错误"),
+
+    //---权限创建错误  2xxxx----
+    PERMISSIONERROR(false, 20002, "缺少权限名称name或权限标识code");
 
 
     //---用户操作返回码  3xxxx----
