@@ -3,6 +3,7 @@ package com.ihrm.common.handler;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
 import com.ihrm.common.exception.CommonException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *      1.声明异常处理器
  *      2.对异常统一处理
  */
+@Slf4j
 @ControllerAdvice
 public class BaseExceptionHandler {
 
@@ -30,6 +32,7 @@ public class BaseExceptionHandler {
             return result;
         }
         Result result = new Result(ResultCode.SERVER_ERROR);
+        log.debug(e.getMessage());
         return result;
     }
 

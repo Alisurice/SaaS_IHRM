@@ -20,5 +20,16 @@ spring:
   devtools:
     restart:
       enabled: true
+
 # 当前企业
 company-id: 1
+
+jwt:
+  config:
+    key: saas-ihrm
+    ttl: 3600000
+
+logging:
+  level:
+    com.ihrm.*: debug
+
