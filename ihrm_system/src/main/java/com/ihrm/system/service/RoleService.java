@@ -92,7 +92,7 @@ public class RoleService extends BaseService {
         Set<Permission> perms = new HashSet<>();
         for (String permId : permIds) {
             Permission perm = permissionDao.findById(permId).get();
-            //需要根据父id和类型查询API权限列表
+            //需要根据父id和类型查询菜单或按钮对应的API权限列表
             List<Permission> apiList = permissionDao.findByTypeAndPid(PermissionConstants.PY_API, perm.getId());
             perms.addAll(apiList);//自动赋予API权限
             perms.add(perm);//当前菜单或按钮的权限
