@@ -20,6 +20,7 @@ public class TestUserController {
 
     private int port = 9002;
     RestTemplate restTemplate = new RestTemplate();
+
     @Test
     public void testLogin(){
 
@@ -44,7 +45,7 @@ public class TestUserController {
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         headers.setContentType(type);
         headers.add("Accept", MediaType.APPLICATION_JSON.toString());
-        headers.add("Authorization", "Bearer eyJhbGciOiJIUdzI1NiJ9.eyJqdGkiOiIxNDczODg3Nzg2MDE2NDY4OTkyIiwic3ViIjoiMjM0IiwiaWF0IjoxNjQwMzQ5NzA2LCJjb21wYW55SWQiOiIxIiwiZXhwIjoxNjQwMzUzMzA2fQ.3dzzoM11hw8FxZalwoXZ2_Om7Q0s6YD_qbB8ZlUQCUE");
+        headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxNDczODg3Nzg2MDE2NDY4OTkyIiwic3ViIjoiMjM0IiwiaWF0IjoxNjQwNjA0OTU2LCJjb21wYW55SWQiOiIxIiwiZXhwIjoxNjQwNjA4NTU2fQ.PRrqzJtqPv4DEE_VTlKVdcSQxQVqKyAxtMbe0_4b3QU");
         HttpEntity<String> formEntity = new HttpEntity<String>("", headers);
 
 

@@ -1,5 +1,6 @@
 package com.ihrm.common.controller;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -11,20 +12,24 @@ public class BaseController {
     public HttpServletResponse response;
 
     //1.设置保存的企业id
-    // TODO: 2021/12/14 企业id：目前使用固定值1，以后会解决
-    @Value("${company-id}")
+    //@Value("${company-id}")
     protected String companyId;
-    //protected String companyId;
-
     protected String companyName;
-    protected String userId;
+    protected Claims claims;
 
 
-
+    //进入控制器之前执行的方法
     @ModelAttribute
     public void setResAndReq(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
+        Object obj = request.getAttribute("user_claims");
+        if (obj != null){
+            this.claims = (Claims) obj;
+            this.companyId = (String) claims.get("companyId");
+            this.companyName = (String) claims.get("companyName");
+        }
+
 
     }
 }
