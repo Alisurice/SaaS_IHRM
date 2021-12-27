@@ -7,6 +7,8 @@ import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,8 +39,21 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
             //从token中解析获取claims
             Claims claims = jwtUtils.parseJwt(token);
             if (claims != null){
-                request.setAttribute("user_claims" , claims);
-                return true;
+                //通过claims获取到当前用户的可访问API权限字符串
+                String apis = (String) claims.get("apis");
+                //通过handler
+                HandlerMethod h = (HandlerMethod) handler;
+                //获取接口上的requestMapping注解
+                RequestMapping annotation = h.getMethodAnnotation(RequestMapping.class);
+                //获取当前请求接口中的name属性
+                String name = annotation.name();
+                //判断当前用户是否具有相应的请求权限
+                if (apis.contains(name)) {
+                    request.setAttribute("user_claims" , claims);
+                    return true;
+                }else{
+                    throw new CommonException(ResultCode.UNAUTHORISE);
+                }
             }
         }
 
