@@ -49,6 +49,7 @@ public class PermissionRealm extends AuthorizingRealm {
 
     //认证:认证的主要目的,比较y用户和密码是否与数据库中的一致
     //将安全数据存到shiro进行保管
+    //然后通过认证之后，会加载用户相应的安全数据（即权限数据），然后将安全数据存到shiro(比如的session中?)进行保管
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         //构造uptoken
         UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;

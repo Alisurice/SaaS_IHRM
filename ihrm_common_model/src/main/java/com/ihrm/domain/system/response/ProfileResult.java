@@ -5,15 +5,18 @@ import com.ihrm.domain.system.Role;
 import com.ihrm.domain.system.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.crazycake.shiro.AuthCachePrincipal;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Setter
 @Getter
-public class ProfileResult {
+public class ProfileResult implements Serializable, AuthCachePrincipal {
     private String mobile;
     private String username;
     private String company;
+    private String companyId;
     private Map<String,Object> roles = new HashMap<>(); //感觉叫resourceGroup更正确
     //它首先是一个资源组，然后在资源组中，我们用资源的权限代码标象征一个资源？
 
@@ -21,6 +24,7 @@ public class ProfileResult {
         this.mobile = user.getMobile();
         this.username = user.getUsername();
         this.company = user.getCompanyName();
+        this.companyId = user.getCompanyId();
 
         //Set可以过滤掉重名的
         Set<Role> roles = user.getRoles();
@@ -52,6 +56,7 @@ public class ProfileResult {
         this.mobile = user.getMobile();
         this.username = user.getUsername();
         this.company = user.getCompanyName();
+        this.companyId = user.getCompanyId();
 
         Set<String> menus = new HashSet<>();
         Set<String> points = new HashSet<>();
@@ -72,5 +77,10 @@ public class ProfileResult {
         this.roles.put("menus",menus);
         this.roles.put("points",points);
         this.roles.put("apis",apis);
+    }
+
+    @Override
+    public String getAuthCacheKey() {
+        return null;
     }
 }
