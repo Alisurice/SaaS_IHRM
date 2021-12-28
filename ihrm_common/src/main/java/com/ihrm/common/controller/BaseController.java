@@ -19,6 +19,7 @@ public class BaseController {
     //@Value("${company-id}")
     protected String companyId;
     protected String companyName;
+    protected String userId;
     protected Claims claims;
 
 
@@ -53,6 +54,7 @@ public class BaseController {
             ProfileResult result = (ProfileResult) principals.getPrimaryPrincipal();
             this.companyId = result.getCompanyId();
             this.companyName = result.getCompany();
+            this.userId = result.getUserId();
         }
     }
 }
