@@ -27,10 +27,8 @@ public class TestUserController {
 
     @Test
     public void testLogin(){
-
-
         Map<String, String> form = new HashMap<>();
-        form.put("mobile", "234");
+        form.put("mobile", "13800000001");
         form.put("password", "123456");
 
         String result = restTemplate.postForObject("http://localhost:"+port+"/sys/login", form, String.class);
