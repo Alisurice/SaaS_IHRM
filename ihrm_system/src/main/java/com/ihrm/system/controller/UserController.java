@@ -5,6 +5,7 @@ import com.ihrm.common.entity.PageResult;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
 import com.ihrm.common.exception.CommonException;
+import com.ihrm.common.poi.ExcelImportUtil;
 import com.ihrm.common.utils.JwtUtils;
 import com.ihrm.common.utils.PermissionConstants;
 import com.ihrm.domain.system.Permission;
@@ -16,6 +17,8 @@ import com.ihrm.system.service.PermissionService;
 import com.ihrm.system.service.UserService;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,9 +29,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +52,20 @@ public class UserController extends BaseController {
     private UserService userService;
     @Autowired
     private JwtUtils jwtUtils;
+
+
+    /**
+     * 导入Excel,添加用户
+     */
+    @RequestMapping(value = "/user/import" , method = RequestMethod.POST)
+    public Result importUser(@RequestParam(name = "file") MultipartFile file) throws Exception {
+        //1.解析excel
+        //1.1根据Excel文件创建工作簿
+        List<User> list = new ExcelImportUtil(User.class).readExcel(file.getInputStream(), 1, 1);
+        //3.批量保存用户
+        userService.saveAll(list , companyId , companyName);
+        return new Result(ResultCode.SUCCESS);
+    }
 
     /**
      * 分配角色

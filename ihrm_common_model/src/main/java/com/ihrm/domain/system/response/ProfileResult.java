@@ -13,6 +13,7 @@ import java.util.*;
 @Setter
 @Getter
 public class ProfileResult implements Serializable, AuthCachePrincipal {
+    private String userId;
     private String mobile;
     private String username;
     private String company;
@@ -25,6 +26,7 @@ public class ProfileResult implements Serializable, AuthCachePrincipal {
         this.username = user.getUsername();
         this.company = user.getCompanyName();
         this.companyId = user.getCompanyId();
+        this.userId = user.getId();
 
         //Set可以过滤掉重名的
         Set<Role> roles = user.getRoles();
@@ -57,6 +59,7 @@ public class ProfileResult implements Serializable, AuthCachePrincipal {
         this.username = user.getUsername();
         this.company = user.getCompanyName();
         this.companyId = user.getCompanyId();
+        this.userId = user.getId();
 
         Set<String> menus = new HashSet<>();
         Set<String> points = new HashSet<>();
