@@ -184,7 +184,7 @@ public class EmployeeController extends BaseController {
     }
 
     /**
-     * 历史归档详情列表
+     * Todo 历史归档详情列表
      */
     @RequestMapping(value = "/archives/{month}", method = RequestMethod.GET)
     public Result archives(@PathVariable(name = "month") String month, @RequestParam(name = "type") Integer type) throws Exception {
@@ -192,7 +192,7 @@ public class EmployeeController extends BaseController {
     }
 
     /**
-     * 归档更新
+     * ·
      */
     @RequestMapping(value = "/archives/{month}", method = RequestMethod.PUT)
     public Result saveArchives(@PathVariable(name = "month") String month) throws Exception {
@@ -214,7 +214,7 @@ public class EmployeeController extends BaseController {
 
 
     /**
-     * 当月人事报表导出
+     * Todo 当月人事报表导出 可以导出，但是前端乱码
      *  参数：
      *      年月-月（2018-02%）
      */
