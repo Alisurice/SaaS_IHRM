@@ -1,4 +1,4 @@
-package com.ihrm.domain.system;
+package com.ihrm.domain.system.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
