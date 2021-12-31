@@ -19,6 +19,9 @@ public class QiniuUploadUtil {
     private static final String prix = "http://r4z62ucwu.hd-bkt.clouddn.com/";
     private UploadManager manager;
 
+    public static String getPrix(){
+        return QiniuUploadUtil.prix;
+    }
     public QiniuUploadUtil() {
         //初始化基本配置
         Configuration cfg = new Configuration(Region.region0());
