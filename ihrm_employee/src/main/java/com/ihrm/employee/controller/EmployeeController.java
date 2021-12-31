@@ -77,10 +77,11 @@ public class EmployeeController extends BaseController {
 
         Map<String, Object> personalMap = BeanMapUtils.beanToMap(personal);
         Map<String, Object> jobsMap = BeanMapUtils.beanToMap(jobs);
-        params.put("staffPhoto" , staffPhoto);
+
 
         params.putAll(personalMap);
         params.putAll(jobsMap);
+        params.put("staffPhoto" , staffPhoto);
 
         ServletOutputStream sos = response.getOutputStream();
         try{
