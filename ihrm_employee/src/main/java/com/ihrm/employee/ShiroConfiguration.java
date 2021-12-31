@@ -56,6 +56,7 @@ public class ShiroConfiguration {
         //anno -- 匿名访问
         filterMap.put("/sys/login" , "anon");
         filterMap.put("/autherror" , "anon");
+        filterMap.put("/employees/export/*" , "anon");
         //authc -- 认证之后访问(登录)
         filterMap.put("/**" , "authc");
         //perms -- 具有某种权限(使用注解配置权限)
