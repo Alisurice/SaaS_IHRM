@@ -36,6 +36,7 @@ public class ShiroConfiguration {
     @Bean
     public SecurityManager getSecurityManager(IhrmRealm realm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        //将自定义的realm交给安全管理器统一调度管理
         securityManager.setRealm(realm);
 
         //将自定义的会话管理器注册到安全管理器中

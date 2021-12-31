@@ -6,6 +6,8 @@ eureka:
 server:
   port: 9003
 spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
   application:
     name: ihrm-employee #指定服务名
   datasource:
