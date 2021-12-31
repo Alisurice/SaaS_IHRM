@@ -54,6 +54,16 @@ public class UserController extends BaseController {
     private JwtUtils jwtUtils;
 
 
+
+    @RequestMapping("/user/upload/{id}")
+    public Result upload(@PathVariable String id , @RequestParam(name = "file") MultipartFile file) throws Exception {
+        //1.调用service保存图片
+        String imgUrl = userService.uploadImage(id , file);
+        //2.返回数据
+        return new Result(ResultCode.SUCCESS , imgUrl);
+
+    }
+
     /**
      * 导入Excel,添加用户
      */
