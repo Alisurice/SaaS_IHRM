@@ -3,14 +3,17 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:6868/eureka
+  instance:
+    perferIpAddress : true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
 #服务配置
 server:
-  port: 9002
+  port: 9004
 #spring配置
 spring:
   #1.应用配置
   application:
-    name: ihrm-sys #指定服务名
+    name: ihrm-system #指定服务名
   #2.数据库连接池
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,14 +25,14 @@ spring:
     database: MySQL
     show-sql: true
     open-in-view: true
-  devtools:
-    restart:
-      enabled: true
+#  devtools:
+#    restart:
+#      enabled: true
   redis:
     host: 127.0.0.1
     port: 6379
-  autoconfigure:
-    exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
+#  autoconfigure:
+#    exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
 
 
 # 当前企业

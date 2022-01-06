@@ -3,13 +3,16 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:6868/eureka
+  instance:
+    perferIpAddress : true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
 #服务配置
 server:
-  port: 9001
+  port: 9002
 #spring配置
 spring:
-  autoconfigure:
-    exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
+#  autoconfigure:
+#    exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
   #1.应用配置
   application:
     name: ihrm-company #指定服务名
@@ -27,8 +30,6 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-  devtools:
-    restart:
-      enabled: true
+
 # 当前企业
 company-id: 1
