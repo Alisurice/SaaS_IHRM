@@ -20,10 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author: hyl
- * @date: 2020/02/04
- **/
+
 @Configuration(value = "ihrm_social_securitys")
 public class ShiroConfiguration {
 

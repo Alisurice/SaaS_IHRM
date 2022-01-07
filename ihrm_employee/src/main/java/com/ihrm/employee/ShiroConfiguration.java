@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-@Configuration
+@Configuration(value = "ihrm_employee")
 public class ShiroConfiguration {
 
     //创建realm
