@@ -1,6 +1,5 @@
 package com.ihrm.atte.controller;
 
-import com.ihrm.atte.dao.AttendanceDao;
 import com.ihrm.atte.service.ConfigurationService;
 import com.ihrm.common.controller.BaseController;
 import com.ihrm.common.entity.Result;
@@ -27,7 +26,7 @@ public class ConfigController extends BaseController {
     /**
      * 获取考勤设置
      */
-    @RequestMapping(value = "/atte/item" , method = RequestMethod.POST)
+    @RequestMapping(value = "/com/ihrm/atte/item", method = RequestMethod.POST)
     public Result atteConfig(String departmentId){
         AttendanceConfig ac = configurationService.getAtteConfig(companyId , departmentId);
         return new Result(ResultCode.SUCCESS , ac);
@@ -36,7 +35,7 @@ public class ConfigController extends BaseController {
     /**
      * 保存考勤设置
      */
-    @RequestMapping(value = "/atte" , method = RequestMethod.PUT)
+    @RequestMapping(value = "/com/ihrm/atte", method = RequestMethod.PUT)
     public Result saveAtteConfig(@RequestBody  AttendanceConfig ac){
         ac.setCompanyId(companyId );
         configurationService.saveAtteConfig(ac);

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.naming.Name;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +57,7 @@ public class ArchiveService {
 			info.setStatisData(map);
 			info.setId(idWorker.nextId() + "");
 			info.setAtteArchiveMonthlyId(archiveMonthly.getId());
+			info.setArchiveDate(archiveDate);
 			archiveMonthlyInfoDao.save(info);
 		}
 		//总人数

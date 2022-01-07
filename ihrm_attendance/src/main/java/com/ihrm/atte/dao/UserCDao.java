@@ -18,5 +18,5 @@ public interface UserCDao extends JpaRepository<User,String>, JpaSpecificationEx
     List<User> findByCompanyId(String companyId);
 
     @Query(value = "select * from bs_user where company_id = ?1" , nativeQuery = true)
-    Page<User> findPage(String companyId , Pageable pageable);
+    Page<User> findPage(String companyId, Pageable pageable);
 }
