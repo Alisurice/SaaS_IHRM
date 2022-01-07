@@ -38,7 +38,7 @@ public class BaseController {
         }
     }*/
 
-    //使用shiro获取
+    //使用shiro获取x
     //进入控制器之前执行的方法
     @ModelAttribute
     public void serResAndReq(HttpServletRequest request,HttpServletResponse response){
