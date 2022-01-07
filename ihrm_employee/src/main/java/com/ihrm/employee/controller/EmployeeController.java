@@ -7,9 +7,11 @@ import com.ihrm.common.entity.ResultCode;
 import com.ihrm.common.poi.ExcelExportUtil;
 import com.ihrm.common.utils.BeanMapUtils;
 import com.ihrm.common.utils.DownloadUtils;
+import com.ihrm.common.utils.QiniuUploadUtil;
 import com.ihrm.domain.employee.*;
 import com.ihrm.domain.employee.response.EmployeeReportResult;
 import com.ihrm.employee.service.*;
+import net.sf.jasperreports.engine.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +54,46 @@ public class EmployeeController extends BaseController {
     @Autowired
     private ArchiveService archiveService;
 
+    /**
+     * 打印员工pdf报表
+     */
+    @RequestMapping(value = "/{id}/pdf" , method = RequestMethod.GET)
+    public void pdf(@PathVariable String id) throws IOException {
+        //1.引入jasper文件
+        Resource resource = new ClassPathResource("templates/profile.jasper");
+        FileInputStream fis = new FileInputStream(resource.getFile());
+
+        //2.构造数据
+        //用户详情数据
+        UserCompanyPersonal personal = userCompanyPersonalService.findById(id);
+        //用户岗位信息数据
+        UserCompanyJobs jobs = userCompanyJobsService.findById(id);
+
+        //用户头像
+        String staffPhoto = QiniuUploadUtil.getPrix() + id + "?t=100";
+
+        //3.填充pdf模版数据,并输出pdf
+        Map params = new HashMap();
+
+        Map<String, Object> personalMap = BeanMapUtils.beanToMap(personal);
+        Map<String, Object> jobsMap = BeanMapUtils.beanToMap(jobs);
+
+
+        params.putAll(personalMap);
+        params.putAll(jobsMap);
+        params.put("staffPhoto" , staffPhoto);
+
+        ServletOutputStream sos = response.getOutputStream();
+        try{
+            JasperPrint print = JasperFillManager.fillReport(fis , params , new JREmptyDataSource());
+            JasperExportManager.exportReportToPdfStream(print , sos);
+        }catch (JRException e){
+            e.printStackTrace();
+        }finally {
+            sos.flush();
+        }
+
+    }
 
     /**
      * 员工个人信息保存
@@ -220,9 +265,12 @@ public class EmployeeController extends BaseController {
      */
     @RequestMapping(value = "/export/{month}", method = RequestMethod.GET)
     public void export(@PathVariable(name = "month") String month) throws Exception {
+
         //1.构造数据
         List<EmployeeReportResult> list =
                 userCompanyPersonalService.findByReport(companyId,month+"%");
+        System.out.println(companyId+"  "+ month+"%");
+        System.out.println(list.toString());
         //2.加载模板流数据
         Resource resource = new ClassPathResource("excel-template/hr-demo.xlsx");
         FileInputStream fis = new FileInputStream(resource.getFile());

@@ -2,7 +2,10 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:6868/eureka/
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    perferIpAddress : true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
 server:
   port: 9003
 spring:
@@ -20,4 +23,5 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-
+# 当前企业
+company-id: 1

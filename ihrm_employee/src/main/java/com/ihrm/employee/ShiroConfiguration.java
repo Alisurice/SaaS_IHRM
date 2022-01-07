@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-@Configuration
+@Configuration(value = "ihrm_employee")
 public class ShiroConfiguration {
 
     //创建realm
@@ -56,6 +56,9 @@ public class ShiroConfiguration {
         //anno -- 匿名访问
         filterMap.put("/sys/login" , "anon");
         filterMap.put("/autherror" , "anon");
+        //Todo 权限拦截
+        filterMap.put("/employees/*/pdf" , "anon");
+
         //authc -- 认证之后访问(登录)
         filterMap.put("/**" , "authc");
         //perms -- 具有某种权限(使用注解配置权限)
