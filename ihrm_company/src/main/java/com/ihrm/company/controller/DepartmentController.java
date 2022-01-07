@@ -27,10 +27,7 @@ public class DepartmentController extends BaseController {
     @Autowired
     private CompanyService companyService;
 
-    //1.设置保存的企业id
-    // TODO: 2021/12/14 企业id：目前使用固定值1，以后会解决
-    @Value("${company-id}")
-    private String companyId;
+
 
     @RequestMapping(value = "/department" ,method = RequestMethod.POST)
     public Result save(@RequestBody Department department){
