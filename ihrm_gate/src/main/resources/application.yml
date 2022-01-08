@@ -17,9 +17,9 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-  autoconfigure:
-    exclude:
-    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#  autoconfigure:
+#    exclude:
+#    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 
 #配置路由规则
@@ -55,7 +55,30 @@ zuul:
       stripPrefix: false
       sentiviteHeaders:   #将指定路由的敏感头设置为空
       customSensitiveHeaders: true #对指定路由开启自定义敏感头
-
+    ihrm-atte-cfg: #考勤配置
+      path: /cfg/** #配置请求URL的请求规则
+      serviceId: ihrm-attendance #指定Eureka注册中心中的服务id
+      stripPrefix: false
+      sentiviteHeaders:   #将指定路由的敏感头设置为空
+      customSensitiveHeaders: true #对指定路由开启自定义敏感头
+    ihrm-atte-attendances: #考勤管理
+      path: /attendances/** #配置请求URL的请求规则
+      serviceId: ihrm-attendance #指定Eureka注册中心中的服务id
+      stripPrefix: false
+      sentiviteHeaders:   #将指定路由的敏感头设置为空
+      customSensitiveHeaders: true #对指定路由开启自定义敏感头
+    ihrm-salarys: #薪资管理
+      path: /salarys/** #配置请求URL的请求规则
+      serviceId: ihrm-salarys #指定Eureka注册中心中的服务id
+      stripPrefix: false
+      sentiviteHeaders:   #将指定路由的敏感头设置为空
+      customSensitiveHeaders: true #对指定路由开启自定义敏感头
+    ihrm-user-audit: #用户自助-审批
+      path: /user/** #配置请求URL的请求规则
+      serviceId: ihrm-audit #指定Eureka注册中心中的服务id
+      stripPrefix: false
+      sentiviteHeaders:   #将指定路由的敏感头设置为空
+      customSensitiveHeaders: true #对指定路由开启自定义敏感头
 logging:
   level:
     com.ihrm.*: debug
@@ -73,5 +96,5 @@ management:
         include: routes
 
 ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout : 10000
+  ReadTimeout: 20000
+  ConnectTimeout : 20000
