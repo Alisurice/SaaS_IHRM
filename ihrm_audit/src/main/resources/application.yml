@@ -1,3 +1,14 @@
+#注册到eureka的服务地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    preferIpAddress : true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+#服务配置
+server:
+  port: 9009
 #spring配置
 spring:
   #1.应用配置
@@ -6,13 +17,13 @@ spring:
   #2.数据库连接池
   datasource:
     act:
-      jdbc-url: jdbc:mysql://localhost:3306/act?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/act?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
       username : root
       password : 123456
-      driver-class-name: com.mysql.cj.jdbc.Driver
     ihrm:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/ihrm?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      jdbc-url: jdbc:mysql://localhost:3306/ihrm?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
   redis:
@@ -26,13 +37,4 @@ spring:
   activiti:
     history-level: full
     db-history-used: true
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:6868/eureka/
-  instance:
-    preferIpAddress : true
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
-#服务配置
-server:
-  port: 9009
+

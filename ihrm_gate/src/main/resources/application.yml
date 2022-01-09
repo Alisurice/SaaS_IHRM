@@ -25,8 +25,8 @@ spring:
 #配置路由规则
 zuul:
   host:
-    connect-timeout-millis: 15000  #HTTP连接超时要比Hystrix的大
-    socket-timeout-millis: 60000  #socket超时
+    connect-timeout-millis: 150000  #HTTP连接超时要比Hystrix的大
+    socket-timeout-millis: 200000  #socket超时
   routes:
     #路由id
     ihrm-company:
@@ -82,9 +82,25 @@ zuul:
 logging:
   level:
     com.ihrm.*: debug
+    com.netflix: DEBUG
 
 
-
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 240000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  eureka:
+    enabled: true
 
 management:
   endpoint:
@@ -95,6 +111,3 @@ management:
       exposure:
         include: routes
 
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout : 20000
