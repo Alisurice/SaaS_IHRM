@@ -3,16 +3,13 @@ package com.ihrm.company.controller;
 import com.ihrm.common.controller.BaseController;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
-import com.ihrm.company.dao.DepartmentDao;
 import com.ihrm.company.service.CompanyService;
 import com.ihrm.company.service.DepartmentService;
 import com.ihrm.domain.company.Company;
 import com.ihrm.domain.company.Department;
 import com.ihrm.domain.company.response.DeptListResult;
-import com.sun.xml.internal.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
