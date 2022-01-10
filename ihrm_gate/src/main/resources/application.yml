@@ -79,10 +79,13 @@ zuul:
       stripPrefix: false
       sentiviteHeaders:   #将指定路由的敏感头设置为空
       customSensitiveHeaders: true #对指定路由开启自定义敏感头
+  include-debug-header: true
+debug: true
+
 logging:
   level:
     com.ihrm.*: debug
-    com.netflix: DEBUG
+#    com.netflix: debug
 
 
 hystrix:
@@ -110,4 +113,3 @@ management:
     web:
       exposure:
         include: routes
-

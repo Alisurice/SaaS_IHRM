@@ -2,6 +2,7 @@ package com.ihrm.gate;
 
 import com.ihrm.common.shiro.realm.IhrmRealm;
 import com.ihrm.common.shiro.session.CustomSessionManager;
+import com.ihrm.gate.filter.ShiroUserFilter;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -56,6 +58,14 @@ public class ShiroConfiguration {
         //3.通用配置（配置登录页面，登录成功页面，验证未成功页面）
         filterFactory.setLoginUrl("/autherror?code=1"); //设置登录页面
         filterFactory.setUnauthorizedUrl("/autherror?code=2"); //授权失败跳转页面
+
+
+        //跨域和预检options的处理
+        Map<String, Filter> filters = filterFactory.getFilters();
+        // 注意这里不要用Bean的方式，否则会报错
+        filters.put("authc", new ShiroUserFilter());
+        filterFactory.setFilters(filters);
+
         //4.配置过滤器集合
         /**
          * key  ：访问连接
