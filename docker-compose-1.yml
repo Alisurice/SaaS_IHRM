@@ -11,7 +11,7 @@ services:
   redis:
     image: redis:latest
     ports:
-    - 6375:3306
+    - 6375:6375
 
   ihrm_eureka:
     image: ihrm_eureka
