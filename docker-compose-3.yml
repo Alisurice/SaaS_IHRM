@@ -15,21 +15,6 @@ services:
       - 9005:9005
     environment:
       - spring.profiles.active=prod
-  ihrm_attendance:
-    image: ihrm_attendance
-    build: ./ihrm_attendance
-    ports:
-      - 9006:9006
-    environment:
-      - spring.profiles.active=prod
-
-  ihrm_audit:
-    image: ihrm_audit
-    build: ./ihrm_audit
-    ports:
-      - 9009:9009
-    environment:
-      - spring.profiles.active=prod
 
 
 
