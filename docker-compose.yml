@@ -16,3 +16,5 @@ services:
     build: ./ihrm_gate
     ports:
       - 9001:9001
+    environment:
+      - spring.profiles.active=prod
