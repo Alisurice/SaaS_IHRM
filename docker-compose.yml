@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+#  mysql:
+#    image: mysql:8.0.20
+#    ports:
+#    - 3306:3306
+#    environment:
+#    - MYSQL_ROOT_PASSWORD=123456
+#  redis:
+#    image: redis:latest
+#    ports:
+#    - 6375:3306
+  ihrm_gate:
+    image: ihrm-gate
+    build: ./ihrm_gate
+    ports:
+      - 9001:9001

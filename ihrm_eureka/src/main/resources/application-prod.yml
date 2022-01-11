@@ -1,0 +1,6 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ihrm_eureka:6868/eureka/
+
+
