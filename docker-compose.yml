@@ -1,20 +1,28 @@
 version: '3'
 
 services:
-#  mysql:
-#    image: mysql:8.0.20
-#    ports:
-#    - 3306:3306
-#    environment:
-#    - MYSQL_ROOT_PASSWORD=123456
-#  redis:
-#    image: redis:latest
-#    ports:
-#    - 6375:3306
+  mysql:
+    image: ihrm-mysql:latest
+    build: ./mysql
+    ports:
+    - 3306:3306
+    environment:
+    - MYSQL_ROOT_PASSWORD=123456
+  redis:
+    image: redis:latest
+    ports:
+    - 6375:3306
   ihrm_gate:
     image: ihrm-gate
     build: ./ihrm_gate
     ports:
       - 9001:9001
+    environment:
+      - spring.profiles.active=prod
+  ihrm_audit:
+    image: ihrm_audit
+    build: ./ihrm_audit
+    ports:
+      - 9009:9009
     environment:
       - spring.profiles.active=prod
