@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  ihrm_gate:
+    image: ihrm-gate
+    build: ./ihrm_gate
+    ports:
+      - 9001:9001
+    environment:
+      - spring.profiles.active=prod
+  ihrm_company:
+    image: ihrm_company
+    build: ./ihrm_company
+    ports:
+      - 9002:9002
+    environment:
+      - spring.profiles.active=prod
+  ihrm_employee:
+    image: ihrm_employee
+    build: ./ihrm_employee
+    ports:
+      - 9003:9003
+    environment:
+      - spring.profiles.active=prod
+
