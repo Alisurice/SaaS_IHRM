@@ -1,15 +1,22 @@
 version: '3'
 
 services:
-  ihrm_system:
-    image: ihrm_system
-    build: ./ihrm_system
+  ihrm-company:
+    image: ihrm-company
+    build: ./ihrm_company
     ports:
-      - 9004:9004
+      - 9002:9002
     environment:
       - spring.profiles.active=prod
-  ihrm_social_securitys:
-    image: ihrm_social_securitys
+  ihrm-employee:
+    image: ihrm-employee
+    build: ./ihrm_employee
+    ports:
+      - 9003:9003
+    environment:
+      - spring.profiles.active=prod
+  ihrm-social_securitys:
+    image: ihrm-social-securitys
     build: ./ihrm_social_securitys
     ports:
       - 9005:9005

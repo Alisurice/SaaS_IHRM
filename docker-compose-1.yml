@@ -13,12 +13,5 @@ services:
     ports:
     - 6375:6375
 
-  ihrm_eureka:
-    image: ihrm_eureka
-    build: ./ihrm_eureka
-    ports:
-      - 6868:6868
-    environment:
-      - spring.profiles.active=prod
 
 

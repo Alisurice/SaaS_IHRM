@@ -2,9 +2,9 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:6868/eureka
+      defaultZone: http://106.15.251.224:6868/eureka/
   instance:
-    perferIpAddress : true
+    preferIpAddress : true
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
 #服务配置
 server:
@@ -85,7 +85,7 @@ debug: true
 logging:
   level:
     com.ihrm.*: debug
-#    com.netflix: debug
+    com.netflix: debug
 
 
 hystrix:
@@ -113,3 +113,4 @@ management:
     web:
       exposure:
         include: routes
+

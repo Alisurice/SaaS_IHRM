@@ -5,74 +5,76 @@ services:
     image: ihrm-mysql:latest
     build: ./mysql
     ports:
-    - 3306:3306
+      - 3306:3306
     environment:
-    - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=123456
   redis:
     image: redis:latest
     ports:
-    - 6375:6375
-
-  ihrm_eureka:
-    image: ihrm_eureka
+      - 6375:6375
+  ihrm-eureka:
+    image: ihrm-eureka
     build: ./ihrm_eureka
     ports:
-      - 6868:6868
+      - "6868:6868"
     environment:
       - spring.profiles.active=prod
+    hostname: ihrm-eureka
 
-  ihrm_gate:
+  ihrm-gate:
     image: ihrm-gate
     build: ./ihrm_gate
     ports:
-      - 9001:9001
+      - "9001:9001"
     environment:
       - spring.profiles.active=prod
-  ihrm_company:
-    image: ihrm_company
-    build: ./ihrm_company
-    ports:
-      - 9002:9002
-    environment:
-      - spring.profiles.active=prod
-  ihrm_employee:
-    image: ihrm_employee
-    build: ./ihrm_employee
-    ports:
-      - 9003:9003
-    environment:
-      - spring.profiles.active=prod
+    depends_on:
+      - ihrm-eureka
+    hostname: ihrm-gate
 
-  ihrm_system:
-    image: ihrm_system
+  ihrm-system:
+    image: ihrm-system
     build: ./ihrm_system
     ports:
       - 9004:9004
     environment:
       - spring.profiles.active=prod
-  ihrm_social_securitys:
-    image: ihrm_social_securitys
+
+  ihrm-company:
+    image: ihrm-company
+    build: ./ihrm_company
+    ports:
+      - 9002:9002
+    environment:
+      - spring.profiles.active=prod
+  ihrm-employee:
+    image: ihrm-employee
+    build: ./ihrm_employee
+    ports:
+      - 9003:9003
+    environment:
+      - spring.profiles.active=prod
+  ihrm-social_securitys:
+    image: ihrm-social-securitys
     build: ./ihrm_social_securitys
     ports:
       - 9005:9005
     environment:
       - spring.profiles.active=prod
-  ihrm_attendance:
-    image: ihrm_attendance
+
+  ihrm-attendance:
+    image: ihrm-attendance
     build: ./ihrm_attendance
     ports:
       - 9006:9006
     environment:
       - spring.profiles.active=prod
 
-  ihrm_audit:
-    image: ihrm_audit
+  ihrm-audit:
+    image: ihrm-audit
     build: ./ihrm_audit
     ports:
       - 9009:9009
     environment:
       - spring.profiles.active=prod
-
-
-
 

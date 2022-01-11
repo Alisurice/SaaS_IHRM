@@ -1,25 +1,33 @@
 version: '3'
 
 services:
-  ihrm_gate:
+  ihrm-eureka:
+    image: ihrm-eureka
+    build: ./ihrm_eureka
+    ports:
+      - "6868:6868"
+    environment:
+      - spring.profiles.active=prod
+    hostname: ihrm-eureka
+
+  ihrm-gate:
     image: ihrm-gate
     build: ./ihrm_gate
     ports:
-      - 9001:9001
+      - "9001:9001"
     environment:
       - spring.profiles.active=prod
-  ihrm_company:
-    image: ihrm_company
-    build: ./ihrm_company
+    depends_on:
+      - ihrm-eureka
+    hostname: ihrm-gate
+
+  ihrm-system:
+    image: ihrm-system
+    build: ./ihrm_system
     ports:
-      - 9002:9002
+      - 9004:9004
     environment:
       - spring.profiles.active=prod
-  ihrm_employee:
-    image: ihrm_employee
-    build: ./ihrm_employee
-    ports:
-      - 9003:9003
-    environment:
-      - spring.profiles.active=prod
+
+
 
