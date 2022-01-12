@@ -85,7 +85,7 @@ debug: true
 logging:
   level:
     com.ihrm.*: debug
-    com.netflix: debug
+#    com.netflix: debug
 
 
 hystrix:
