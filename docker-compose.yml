@@ -70,6 +70,15 @@ services:
     environment:
       - spring.profiles.active=prod
 
+  ihrm-salarys:
+    image: salarys-audit
+    build: ./salarys
+    ports:
+      - 9007:9007
+    environment:
+      - spring.profiles.active=prod
+
+
   ihrm-audit:
     image: ihrm-audit
     build: ./ihrm_audit
@@ -77,4 +86,6 @@ services:
       - 9009:9009
     environment:
       - spring.profiles.active=prod
+
+
 

@@ -1,0 +1,11 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ihrm-eureka:6868/eureka/
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/ihrm?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+  redis:
+    host: redis
+    port: 6379
+
