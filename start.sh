@@ -12,7 +12,7 @@ do
   read start_service
   cd $path/$service/target/
   pwd
-  run_java="-Xmx64m -Xms16m -jar ${service}-1.0-SNAPSHOT.jar"
+  run_java="-Xmx64m -Xms16m -jar ${service}-1.0-SNAPSHOT.jar --spring.profiles.active=local"
   nohup java $run_java > $logdir$service".log" 2>&1 &
   echo "starting ${service} ..."
   echo ""

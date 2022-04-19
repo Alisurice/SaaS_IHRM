@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 
 //岗位信息
 @Entity
-@Table(name = "em_user_company_jobs")
+@Table(name="em_user_company_jobs")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,6 +38,7 @@ public class UserCompanyJobs implements Serializable {
     /**
      * 职级
      */
+    @Column(name = "rank_level")
     private String rank;
     /**
      * 转正评价

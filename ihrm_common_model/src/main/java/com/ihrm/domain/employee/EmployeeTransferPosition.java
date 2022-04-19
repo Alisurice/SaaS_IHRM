@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -31,6 +32,7 @@ public class EmployeeTransferPosition implements Serializable {
     /**
      * 职级
      */
+    @Column(name = "rank_level")
     private String rank;
     /**
      * 汇报对象
