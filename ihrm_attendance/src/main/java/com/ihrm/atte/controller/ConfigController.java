@@ -26,7 +26,7 @@ public class ConfigController extends BaseController {
     /**
      * 获取考勤设置
      */
-    @RequestMapping(value = "/com/ihrm/atte/item", method = RequestMethod.POST)
+    @RequestMapping(value = "/atte/item", method = RequestMethod.POST)
     public Result atteConfig(String departmentId){
         AttendanceConfig ac = configurationService.getAtteConfig(companyId , departmentId);
         return new Result(ResultCode.SUCCESS , ac);
@@ -35,7 +35,7 @@ public class ConfigController extends BaseController {
     /**
      * 保存考勤设置
      */
-    @RequestMapping(value = "/com/ihrm/atte", method = RequestMethod.PUT)
+    @RequestMapping(value = "/atte", method = RequestMethod.PUT)
     public Result saveAtteConfig(@RequestBody  AttendanceConfig ac){
         ac.setCompanyId(companyId );
         configurationService.saveAtteConfig(ac);
