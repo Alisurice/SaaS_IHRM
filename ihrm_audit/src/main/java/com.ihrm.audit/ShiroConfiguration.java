@@ -60,6 +60,7 @@ public class ShiroConfiguration {
         //anon -- 匿名访问
         filterMap.put("/sys/login","anon");
         filterMap.put("/autherror","anon");
+        filterMap.put("/**","anon");
         //注册
         //authc -- 认证之后访问（登录）
         //filterMap.put("/**","authc");

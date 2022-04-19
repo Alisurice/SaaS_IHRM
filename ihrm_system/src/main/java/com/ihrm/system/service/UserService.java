@@ -1,5 +1,7 @@
 package com.ihrm.system.service;
 
+import com.ihrm.common.entity.ResultCode;
+import com.ihrm.common.exception.CommonException;
 import com.ihrm.common.utils.IdWorker;
 import com.ihrm.common.utils.QiniuUploadUtil;
 import com.ihrm.domain.company.Department;
@@ -8,6 +10,7 @@ import com.ihrm.domain.system.User;
 import com.ihrm.system.client.DepartmentFeignClient;
 import com.ihrm.system.dao.RoleDao;
 import com.ihrm.system.dao.UserDao;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +29,7 @@ import java.util.*;
 
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -63,6 +67,19 @@ public class UserService {
         //根据id查询用户
         User target = userDao.findById(user.getId()).get();
         //设置用户属性
+
+        //如果设置了新密码，就改密码
+        if(user.getPassword() != "" ){
+            //md5加密密码
+            String password = new Md5Hash(user.getPassword(), user.getMobile(), 3).toString();
+            if(password.length() != user.getPassword().length()){
+                log.debug(user.toString());
+                log.debug("old pw:"+user.getPassword()+"\nsecret pw:"+password);
+                user.setPassword(password);
+            }
+
+        }
+
         target.setUsername(user.getUsername());
         target.setPassword(user.getPassword());
         target.setDepartmentId(user.getDepartmentId());

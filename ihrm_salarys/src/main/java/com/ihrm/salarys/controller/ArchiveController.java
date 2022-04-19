@@ -20,6 +20,12 @@ public class ArchiveController extends BaseController {
     @Autowired
     private ArchiveService archiveService;
 
+
+    @RequestMapping(value = "/detail/{userId}", method = RequestMethod.GET)
+    public Result userDetail(@PathVariable(value = "userId") String userId) {
+        SalaryArchiveDetail details = archiveService.findUserSalaryDetail(userId);
+        return new Result(ResultCode.SUCCESS, details);
+    }
     /**
      * 制作薪资报表
      */

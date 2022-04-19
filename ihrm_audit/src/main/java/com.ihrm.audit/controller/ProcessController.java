@@ -104,7 +104,9 @@ public class ProcessController extends BaseController {
         return new Result(ResultCode.SUCCESS);
     }
 
-    //查询流程任务明细
+    /**
+     * 查询流程任务明细
+     */
     @RequestMapping(value = "/instance/tasks/{id}",method = RequestMethod.GET)
     public Result tasks(@PathVariable String id) throws IOException {
         //调用service

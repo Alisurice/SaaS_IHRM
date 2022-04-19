@@ -211,30 +211,34 @@ public class AuditService {
 
     /**
      * 提交审核
-     * @param taskInstance  流程任务
-     * @param companyId 企业id
+     *      handleType; // 处理类型（2审批通过；3审批不通过；4撤销）
+     *
+     *  ProcTaskInstance
+     *       handleOpinion: "xxxxxxc"                   操作说明
+     handleType: "4"                            处理类型（2审批通过；3审批不通过；4撤销）
+     handleUserId: "1063705989926227968"        处理人
+     processId: "1175593305465352192"           业务流程id
+     *
      */
     public void commit(ProcTaskInstance taskInstance, String companyId) {
-        //查询业务流程对象
+        //1.查询业务流程对象
         String processId = taskInstance.getProcessId();
         ProcInstance instance = procInstanceDao.findById(processId).get();
-        //设置业务流程状态
+        //2.设置业务流程状态
         instance.setProcessState(taskInstance.getHandleType());
-        //根据不同的操作类型,完成不同的业务处理
-        List<ProcessInstance> processInstanceList = runtimeService.createProcessInstanceQuery()
-                                                        .processInstanceBusinessKey(processId)
-                                                        .list();
-
+        //3.根据不同的操作类型,完成不同的业务处理
+        //查询出activiti中的流程实例 (根据自己的业务id查询activiti中的流程实例)
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(processId).singleResult();
         User user = feignClientService.getUserInfoByUserId(taskInstance.getHandleUserId());
-        if ("2".equals(taskInstance.getHandleType())){
-            //如果审核通过,完成当前的任务
-            //查询出当前节点,完成当前节点任务
-            Task task = taskService.createTaskQuery().processInstanceId(processInstanceList.get(0).getId()).singleResult();
+        if ("2".equals(taskInstance.getHandleType())) {
+            //3.1 如果审核通过,完成当前的任务
+            //查询出当前节点,并完成当前节点任务
+            Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
             taskService.complete(task.getId());
-            //查询出下一个节点,如果存在下一个流程没有结束
-            Task nextTask = taskService.createTaskQuery().processInstanceId(processInstanceList.get(0).getId()).singleResult();
-            if(nextTask != null) {
-                List<User> users = findCurrUsers(nextTask, user);
+            //查询出下一个任务节点,如果存在下一个流程没有结束
+            Task next = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
+            if(next != null) {
+                List<User> users = findCurrUsers(next, user);
                 String usernames = "", userIdS = "";
                 for (User user1 : users) {
                     usernames += user1.getUsername() + " ";
@@ -247,13 +251,14 @@ public class AuditService {
                 //如果不存在下一个节点,任务结束
                 instance.setProcessState("2");
             }
-        }else{
-            //如果审核不通过/撤销,删除流程
-            runtimeService.deleteProcessInstance(processInstanceList.get(0).getId() , taskInstance.getHandleOpinion());
+
+        } else {
+            //3.2 如果审核不通过,或者撤销(删除activiti流程)
+            runtimeService.deleteProcessInstance(processInstance.getId(),taskInstance.getHandleOpinion());
         }
-        //更新业务流程对象,保存业务任务对象
+        //4.更新业务流程对象,保存业务任务对象
         procInstanceDao.save(instance);
-        taskInstance.setTaskId(idWorker.nextId() + "");
+        taskInstance.setTaskId(idWorker.nextId()+"");
         taskInstance.setHandleUserName(user.getUsername());
         taskInstance.setHandleTime(new Date());
         procTaskInstanceDao.save(taskInstance);

@@ -183,32 +183,6 @@ public class UserController extends BaseController {
         } catch (Exception e) {
             return new Result(ResultCode.MOBILEORPASSWORDERROR);
         }
-        //User user = userService.findByMobile(mobile);
-        //
-        ////登录失败
-        //if(user == null || !user.getPassword().equals(password)){
-        //    return new Result(ResultCode.MOBILEORPASSWORDERROR);
-        //}else {
-        //    //登录成功
-        //    //登录成功
-        //    //API权限字符串
-        //    StringBuilder sb = new StringBuilder();
-        //    //获取到所有的可访问API权限
-        //    for (Role role : user.getRoles()) {
-        //        for (Permission perm : role.getPermissions()) {
-        //            if (perm.getType() == PermissionConstants.PY_API){
-        //                sb.append(perm.getCode()).append(",");
-        //            }
-        //        }
-        //    }
-        //
-        //    Map<String, Object> map = new HashMap<>();
-        //    map.put("apis" , sb.toString());//可访问的API权限字符串
-        //    map.put("companyId" , user.getCompanyId());
-        //    map.put("companyName" , user.getCompanyName());
-        //    String token = jwtUtils.createJwt(user.getId(), user.getUsername(), map);
-        //    return new Result(ResultCode.SUCCESS,token);
-        //}
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)

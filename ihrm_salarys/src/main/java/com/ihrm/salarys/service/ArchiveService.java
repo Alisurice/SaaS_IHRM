@@ -72,6 +72,9 @@ public class ArchiveService {
         return archiveDetailDao.findByArchiveId(id);
     }
 
+    public SalaryArchiveDetail findUserSalaryDetail(String userId) {
+        return archiveDetailDao.findByUserId(userId);
+    }
     /**
      *  查询月报表
      * @param yearMonth 年月

@@ -37,12 +37,17 @@ public class JpaRepositoriesConfig {
 	public LocalContainerEntityManagerFactoryBean ihrmEntityManager() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(ihrmDataSource);
-		em.setPackagesToScan(new String[] { "com.ihrm.audit.entity" });
+		//配置扫描的实体类包
+		em.setPackagesToScan(new String[] { "com.ihrm.audit.entity","com.ihrm.domain.system" });
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		HashMap<String, Object> properties = new HashMap<>();
 		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.format_sql",  "true");
 		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		properties.put("hibernate.implicit_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
+		properties.put("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
 		em.setJpaPropertyMap(properties);
 		return em;
 	}

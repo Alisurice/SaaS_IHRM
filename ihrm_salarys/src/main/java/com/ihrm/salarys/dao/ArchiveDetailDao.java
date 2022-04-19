@@ -15,4 +15,6 @@ import java.util.List;
 public interface ArchiveDetailDao extends JpaRepository<SalaryArchiveDetail, String>, JpaSpecificationExecutor<SalaryArchiveDetail> {
 
     List<SalaryArchiveDetail> findByArchiveId(String archiveId);
+
+    SalaryArchiveDetail findByUserId(String archiveId);
 }
