@@ -1,0 +1,16 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka/
+spring:
+  datasource:
+    url: jdbc:mysql://106.15.251.224:3306/ihrm?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+
+  redis:
+    host: localhost
+    port: 6379
+
+logging:
+  level:
+    root: debug
+#    com.netflix: debug

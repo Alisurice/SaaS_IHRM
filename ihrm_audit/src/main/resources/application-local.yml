@@ -1,0 +1,23 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka/
+spring:
+  datasource:
+    act:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      jdbc-url: jdbc:mysql://106.15.251.224:3306/act?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    ihrm:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      jdbc-url: jdbc:mysql://106.15.251.224:3306/ihrm?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+  redis:
+    host: localhost
+    port: 6379
+#logging:
+#  level:
+#    root: debug
+
