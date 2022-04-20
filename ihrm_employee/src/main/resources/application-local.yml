@@ -9,8 +9,14 @@ spring:
   redis:
     host: localhost
     port: 6379
+  #3.JPA
+  jpa:
+    database: MySQL
+    show-sql: false
+    open-in-view: false
 
 logging:
   level:
-    root: debug
+    root: warn
 #    com.netflix: debug
+#    root: debug

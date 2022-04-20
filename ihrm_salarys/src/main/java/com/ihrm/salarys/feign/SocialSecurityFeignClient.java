@@ -14,6 +14,6 @@ public interface SocialSecurityFeignClient {
     /**
      *  调用社保模块的归档明细
      */
-    @RequestMapping(value = "/social_securitys/historys/archiveDetail/{userId}/{yearMonth}", method = RequestMethod.GET)
+    @RequestMapping(value = "/social_securitys/historys/data/{userId}/{yearMonth}", method = RequestMethod.GET)
     Result historyData(@PathVariable("userId") String userId, @PathVariable("yearMonth") String yearMonth);
 }

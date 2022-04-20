@@ -15,8 +15,8 @@ public class QiniuUploadUtil {
 
     private static final String accessKey = "GgXeIrzbbpKCRqwNCXrO-o3RsPZQBrXLKB_QK181";
     private static final String secretKey = "0d61sPB8tXqogADRFkIKrwnvWu4aUr68OEPATTES";
-    private static final String bucket = "alisurice";
-    private static final String prix = "http://r4z62ucwu.hd-bkt.clouddn.com/";
+    private static final String bucket = "testsadf";
+    private static final String prix = "http://rakxtkpmm.hn-bkt.clouddn.com/";
     private UploadManager manager;
 
     public static String getPrix(){
@@ -24,7 +24,7 @@ public class QiniuUploadUtil {
     }
     public QiniuUploadUtil() {
         //初始化基本配置
-        Configuration cfg = new Configuration(Region.region0());
+        Configuration cfg = new Configuration(Region.region2());
         //创建上传管理器
         manager = new UploadManager(cfg);
     }

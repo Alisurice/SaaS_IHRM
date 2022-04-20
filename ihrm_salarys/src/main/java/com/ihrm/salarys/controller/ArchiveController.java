@@ -5,6 +5,8 @@ import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
 import com.ihrm.domain.salarys.SalaryArchive;
 import com.ihrm.domain.salarys.SalaryArchiveDetail;
+import com.ihrm.domain.social_security.Archive;
+import com.ihrm.domain.social_security.ArchiveDetail;
 import com.ihrm.salarys.service.ArchiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,4 +49,16 @@ public class ArchiveController extends BaseController {
         }
         return new Result(ResultCode.SUCCESS , list);
     }
+
+
+    /**
+     * 查询历史归档列表
+     */
+    @RequestMapping(value = "/reports/{year}/list" , method = RequestMethod.GET)
+    public Result historyList(@PathVariable String year){
+        List<SalaryArchive> list = archiveService.findByYear(companyId , year);
+        return new Result(ResultCode.SUCCESS , list);
+    }
+
+
 }

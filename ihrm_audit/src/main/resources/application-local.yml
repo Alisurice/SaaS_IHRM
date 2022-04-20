@@ -17,7 +17,13 @@ spring:
   redis:
     host: localhost
     port: 6379
-#logging:
-#  level:
+  #3.JPA
+  jpa:
+    database: MySQL
+    show-sql: false
+    open-in-view: false
+logging:
+  level:
+    root: warn
 #    root: debug
 
